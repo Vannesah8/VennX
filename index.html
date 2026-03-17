@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VennX</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="brand">
+      <h1>VennX</h1>
+      <p>Skill-based competitive gaming</p>
+    </div>
+
+    <nav class="nav-buttons">
+      <button onclick="showScreen('home')">Home</button>
+      <button onclick="showScreen('auth')">Login</button>
+      <button onclick="showScreen('dashboard')">Dashboard</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section id="home" class="screen active">
+      <div class="card hero">
+        <h2>Compete in short games. Win real rewards.</h2>
+        <p>
+          VennX is a micro-stake competitive gaming platform where players enter
+          short skill-based matches and win from shared prize pools.
+        </p>
+        <div class="button-row">
+          <button onclick="showScreen('auth')">Create account</button>
+          <button class="secondary" onclick="showScreen('dashboard')">View demo</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="auth" class="screen">
+      <div class="card narrow">
+        <h2>Create your VennX account</h2>
+        <p class="muted">
+          This is the frontend starter. Real authentication should happen on the backend.
+        </p>
+
+        <div class="form-grid">
+          <input type="text" placeholder="Username" />
+          <input type="email" placeholder="Email address" />
+          <input type="password" placeholder="Password" />
+          <button onclick="showScreen('dashboard')">Continue</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="dashboard" class="screen">
+      <div class="card">
+        <h2>Dashboard</h2>
+        <p class="muted">
+          Wallet display is for UI only. Real balance must always come from the backend.
+        </p>
+
+        <div class="stats">
+          <div class="stat-box">
+            <strong>Wallet</strong>
+            <p>124 KES</p>
+          </div>
+          <div class="stat-box">
+            <strong>Wins</strong>
+            <p>12</p>
+          </div>
+          <div class="stat-box">
+            <strong>Queue Time</strong>
+            <p>4 sec</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Match Lobby</h3>
+
+        <div class="game-list">
+          <div class="game-card">
+            <strong>Reaction Rush</strong>
+            <p>Tap targets faster than your opponent.</p>
+            <small>30 sec</small>
+            <div class="stake-row">
+              <button onclick="joinMatch('Reaction Rush', 5)">5 KES</button>
+              <button onclick="joinMatch('Reaction Rush', 10)">10 KES</button>
+              <button onclick="joinMatch('Reaction Rush', 20)">20 KES</button>
+              <button onclick="joinMatch('Reaction Rush', 50)">50 KES</button>
+            </div>
+          </div>
+
+          <div class="game-card">
+            <strong>Aim Burst</strong>
+            <p>Hit moving targets with speed and accuracy.</p>
+            <small>45 sec</small>
+            <div class="stake-row">
+              <button onclick="joinMatch('Aim Burst', 10)">10 KES</button>
+              <button onclick="joinMatch('Aim Burst', 20)">20 KES</button>
+              <button onclick="joinMatch('Aim Burst', 50)">50 KES</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="messageBox" class="message hidden"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
