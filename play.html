@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VennX Play</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="brand">
+      <h1>VennX</h1>
+      <p>Play Flow</p>
+    </div>
+
+    <nav class="nav-buttons">
+      <a href="index.html"><button>Home</button></a>
+      <a href="play.html"><button>Play</button></a>
+      <a href="wallet.html"><button>Wallet</button></a>
+      <a href="leaderboard.html"><button>Leaderboard</button></a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="card hero">
+      <div class="hero-badge">Competitive queue experience</div>
+      <h2 class="glow-text">Enter a match. Get paired. Win rewards.</h2>
+      <p class="muted">
+        This prototype simulates the VennX match journey from game choice to stake selection,
+        matchmaking, and result display.
+      </p>
+    </section>
+
+    <section class="card">
+      <h3 class="glow-text">Current Wallet</h3>
+      <div class="stats">
+        <div class="stat-box">
+          <strong>Available Balance</strong>
+          <p id="walletBalance">124 KES</p>
+        </div>
+        <div class="stat-box">
+          <strong>Selected Game</strong>
+          <p id="selectedGameText">None</p>
+        </div>
+        <div class="stat-box">
+          <strong>Selected Stake</strong>
+          <p id="selectedStakeText">0 KES</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3 class="glow-text">1. Choose Game</h3>
+      <div class="game-list">
+        <div class="game-card">
+          <strong>Reaction Rush</strong>
+          <p>Tap targets faster than your opponent.</p>
+          <small>30 sec • Reflex game</small>
+          <div class="stake-row" style="margin-top: 12px;">
+            <button onclick="selectGame('Reaction Rush')">Select</button>
+          </div>
+        </div>
+
+        <div class="game-card">
+          <strong>Aim Burst</strong>
+          <p>Hit moving targets with speed and accuracy.</p>
+          <small>45 sec • Precision game</small>
+          <div class="stake-row" style="margin-top: 12px;">
+            <button onclick="selectGame('Aim Burst')">Select</button>
+          </div>
+        </div>
+
+        <div class="game-card">
+          <strong>Reflex Lane</strong>
+          <p>React to visual prompts before time runs out.</p>
+          <small>20 sec • Micro challenge</small>
+          <div class="stake-row" style="margin-top: 12px;">
+            <button onclick="selectGame('Reflex Lane')">Select</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3 class="glow-text">2. Choose Stake</h3>
+      <div class="stake-row">
+        <button onclick="selectStake(5)">5 KES</button>
+        <button onclick="selectStake(10)">10 KES</button>
+        <button onclick="selectStake(20)">20 KES</button>
+        <button onclick="selectStake(50)">50 KES</button>
+      </div>
+      <p class="muted" style="margin-top: 14px;">
+        Prize preview assumes a 10% platform fee.
+      </p>
+      <div class="stats" style="margin-top: 12px;">
+        <div class="stat-box">
+          <strong>Total Pool</strong>
+          <p id="poolText">0 KES</p>
+        </div>
+        <div class="stat-box">
+          <strong>Winner Gets</strong>
+          <p id="winnerGetsText">0 KES</p>
+        </div>
+        <div class="stat-box">
+          <strong>Platform Fee</strong>
+          <p id="feeText">0 KES</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3 class="glow-text">3. Enter Matchmaking</h3>
+      <div class="button-row">
+        <button onclick="startMatchmaking()">Play Now</button>
+        <button class="secondary" onclick="resetPlayFlow()">Reset</button>
+      </div>
+
+      <div id="queueBox" class="message hidden" style="margin-top: 16px;"></div>
+    </section>
+
+    <section class="card">
+      <h3 class="glow-text">4. Match Result</h3>
+      <div id="resultBox" class="message hidden"></div>
+
+      <div id="resultCard" class="game-card hidden" style="margin-top: 16px;">
+        <strong id="resultTitle">Match Complete</strong>
+        <p id="resultDescription">Result details will appear here.</p>
+        <small id="resultMeta">Server validation placeholder</small>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
