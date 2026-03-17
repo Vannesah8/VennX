@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VennX Wallet</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="brand">
+      <h1>VennX</h1>
+      <p>Wallet</p>
+    </div>
+
+    <nav class="nav-buttons">
+      <a href="index.html"><button>Home</button></a>
+      <a href="wallet.html"><button>Wallet</button></a>
+      <a href="leaderboard.html"><button>Leaderboard</button></a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Wallet Overview</h2>
+      <p class="muted">
+        This is the wallet interface prototype. Real balances, deposits, and withdrawals must be handled securely on the backend.
+      </p>
+
+      <div class="stats">
+        <div class="stat-box">
+          <strong>Available Balance</strong>
+          <p>124 KES</p>
+        </div>
+        <div class="stat-box">
+          <strong>Total Won</strong>
+          <p>640 KES</p>
+        </div>
+        <div class="stat-box">
+          <strong>Total Played</strong>
+          <p>57 Matches</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3>Deposit Funds</h3>
+      <p class="muted">Prototype only. Later this will connect to M-Pesa and other payment methods.</p>
+      <div class="stake-row">
+        <button>Deposit 50 KES</button>
+        <button>Deposit 100 KES</button>
+        <button>Deposit 200 KES</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3>Withdraw Funds</h3>
+      <p class="muted">
+        In production, withdrawals should require backend verification, OTP, and risk checks.
+      </p>
+      <div class="stake-row">
+        <button>Withdraw 50 KES</button>
+        <button>Withdraw 100 KES</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3>Recent Transactions</h3>
+      <div class="game-list">
+        <div class="game-card">
+          <strong>Match Win</strong>
+          <p>+18 KES</p>
+          <small>Reaction Rush • Server verified</small>
+        </div>
+        <div class="game-card">
+          <strong>Match Entry</strong>
+          <p>-10 KES</p>
+          <small>Aim Burst • Queue entry</small>
+        </div>
+        <div class="game-card">
+          <strong>Deposit</strong>
+          <p>+100 KES</p>
+          <small>M-Pesa placeholder</small>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
