@@ -326,3 +326,40 @@ a {
     font-size: 1.6rem;
   }
 }
+.hero,
+.stat-box,
+.game-card,
+.message {
+  animation: fadeUp 0.45s ease;
+}
+
+button {
+  position: relative;
+  overflow: hidden;
+}
+
+button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.18) 45%,
+    transparent 100%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.5s ease;
+}
+
+button:hover::after {
+  transform: translateX(120%);
+}
+
+#resultCard {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#resultCard:not(.hidden) {
+  animation: popIn 0.35s ease;
+}
