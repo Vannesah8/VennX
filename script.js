@@ -3,7 +3,7 @@ let selectedStake = 0;
 let walletBalance = 124;
 let queueInterval = null;
 
-function playClickSound(frequency = 700, duration = 0.05) {
+function playClickSound(frequency = 700, duration = 0.04) {
   const AudioContextClass = window.AudioContext || window.webkitAudioContext;
   if (!AudioContextClass) return;
 
@@ -15,7 +15,7 @@ function playClickSound(frequency = 700, duration = 0.05) {
   oscillator.frequency.setValueAtTime(frequency, ctx.currentTime);
 
   gainNode.gain.setValueAtTime(0.0001, ctx.currentTime);
-  gainNode.gain.exponentialRampToValueAtTime(0.035, ctx.currentTime + 0.01);
+  gainNode.gain.exponentialRampToValueAtTime(0.025, ctx.currentTime + 0.01);
   gainNode.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
 
   oscillator.connect(gainNode);
@@ -26,30 +26,10 @@ function playClickSound(frequency = 700, duration = 0.05) {
 }
 
 function attachButtonSounds() {
-  const clickable = document.querySelectorAll("button, .btn, .side-link");
+  const clickable = document.querySelectorAll("button, .btn, .nav-link");
   clickable.forEach((item) => {
     item.addEventListener("click", () => {
-      playClickSound(640, 0.045);
-    });
-  });
-}
-
-function enableTilt() {
-  const tiltCards = document.querySelectorAll(".tilt");
-  tiltCards.forEach((card) => {
-    card.addEventListener("mousemove", (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      const rotateX = ((y / rect.height) - 0.5) * -5;
-      const rotateY = ((x / rect.width) - 0.5) * 5;
-
-      card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-3px)`;
-    });
-
-    card.addEventListener("mouseleave", () => {
-      card.style.transform = "";
+      playClickSound(620, 0.04);
     });
   });
 }
@@ -127,11 +107,12 @@ function startMatchmaking() {
       }
     } else {
       clearInterval(queueInterval);
+
       if (queueBox) {
         queueBox.textContent = "Opponent found. Match starting now...";
       }
 
-      setTimeout(() => finishMatch(), 1200);
+      setTimeout(() => finishMatch(), 1000);
     }
   }, 1000);
 }
@@ -151,7 +132,9 @@ function finishMatch() {
   const didWin = Math.random() > 0.45;
 
   walletBalance -= selectedStake;
-  if (didWin) walletBalance += winnerGets;
+  if (didWin) {
+    walletBalance += winnerGets;
+  }
 
   if (walletText) walletText.textContent = `${walletBalance} KES`;
 
@@ -175,8 +158,7 @@ function finishMatch() {
     resultMeta.textContent = `Stake ${selectedStake} KES • Pool ${totalPool} KES • Fee ${fee} KES • Server validation placeholder`;
   }
 
-  playClickSound(didWin ? 980 : 320, 0.08);
-  setTimeout(() => playClickSound(didWin ? 1180 : 260, 0.06), 70);
+  playClickSound(didWin ? 920 : 300, 0.06);
 }
 
 function resetPlayFlow() {
@@ -207,12 +189,15 @@ function resetPlayFlow() {
     resultBox.textContent = "";
   }
 
-  if (resultCard) resultCard.classList.add("hidden");
+  if (resultCard) {
+    resultCard.classList.add("hidden");
+  }
 
-  if (queueInterval) clearInterval(queueInterval);
+  if (queueInterval) {
+    clearInterval(queueInterval);
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   attachButtonSounds();
-  enableTilt();
 });
