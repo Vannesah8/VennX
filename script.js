@@ -32,7 +32,7 @@ function playClickSound(frequency = 700, duration = 0.05) {
   oscillator.frequency.setValueAtTime(frequency, ctx.currentTime);
 
   gainNode.gain.setValueAtTime(0.0001, ctx.currentTime);
-  gainNode.gain.exponentialRampToValueAtTime(0.05, ctx.currentTime + 0.01);
+  gainNode.gain.exponentialRampToValueAtTime(0.04, ctx.currentTime + 0.01);
   gainNode.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
 
   oscillator.connect(gainNode);
