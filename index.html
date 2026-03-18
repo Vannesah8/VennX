@@ -3,108 +3,194 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VennX</title>
+  <title>VennX | Gamers Lounge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="navbar">
-    <div class="brand">
-      <h1>VennX</h1>
-      <p>Skill-based competitive gaming</p>
+  <div class="ambient ambient-1"></div>
+  <div class="ambient ambient-2"></div>
+  <div class="ambient ambient-3"></div>
+
+  <header class="topbar">
+    <div class="logo-wrap">
+      <div class="logo-box">VX</div>
+      <div>
+        <h1 class="brand">VennX</h1>
+        <p class="brand-sub">Executive Gamers Lounge</p>
+      </div>
     </div>
 
-    <nav class="nav-buttons">
-  <a href="index.html"><button>Home</button></a>
-  <a href="play.html"><button>Play</button></a>
-  <a href="wallet.html"><button>Wallet</button></a>
-  <a href="leaderboard.html"><button>Leaderboard</button></a>
-</nav>
+    <nav class="nav">
+      <a href="#lounge">Lounge</a>
+      <a href="#matches">Matches</a>
+      <a href="#community">Community</a>
+      <a href="#membership">Membership</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a href="play.html" class="btn btn-ghost">Enter Arena</a>
+      <a href="wallet.html" class="btn btn-solid">Join Lounge</a>
+    </div>
   </header>
 
-  <main class="container">
-    <section id="home" class="screen active">
-      <div class="card hero">
-  <div class="hero-badge">Micro-stake esports experience</div>
-  <h2 class="glow-text">Compete in short games. Win real rewards.</h2>
-  <p>
-    VennX is a futuristic competitive gaming platform where players enter
-    fast skill-based matches, challenge each other in seconds, and win from
-    shared prize pools.
-  </p>
-        <div class="button-row">
-          <button onclick="showScreen('auth')">Create account</button>
-          <button class="secondary" onclick="showScreen('dashboard')">View demo</button>
-        </div>
-      </div>
-    </section>
-
-    <section id="auth" class="screen">
-      <div class="card narrow">
-        <h2>Create your VennX account</h2>
-        <p class="muted">
-          This is the frontend starter. Real authentication should happen on the backend.
+  <main>
+    <section class="hero" id="lounge">
+      <div class="hero-left">
+        <span class="eyebrow">PREMIUM SOCIAL GAMING SPACE</span>
+        <h2>
+          A classy and beautiful
+          <span>Gamers Lounge</span>
+          for modern players.
+        </h2>
+        <p>
+          Built for people who love gaming, competition, and atmosphere. VennX blends
+          a luxury lounge feel with a sharp digital experience, giving players a place
+          to relax, connect, and compete in style.
         </p>
 
-        <div class="form-grid">
-          <input type="text" placeholder="Username" />
-          <input type="email" placeholder="Email address" />
-          <input type="password" placeholder="Password" />
-          <button onclick="showScreen('dashboard')">Continue</button>
+        <div class="hero-actions">
+          <a href="play.html" class="btn btn-solid">Start Playing</a>
+          <a href="leaderboard.html" class="btn btn-ghost">View Leaderboard</a>
         </div>
-      </div>
-    </section>
 
-    <section id="dashboard" class="screen">
-      <div class="card">
-        <h2 class="glow-text">Dashboard</h2>
-        <p class="muted">
-          Wallet display is for UI only. Real balance must always come from the backend.
-        </p>
-
-        <div class="stats">
-          <div class="stat-box">
-            <strong>Wallet</strong>
-            <p>124 KES</p>
+        <div class="hero-metrics">
+          <div class="metric-card">
+            <h3>24/7</h3>
+            <p>Open social sessions</p>
           </div>
-          <div class="stat-box">
-            <strong>Wins</strong>
-            <p>12</p>
+          <div class="metric-card">
+            <h3>120+</h3>
+            <p>Elite lounge events</p>
           </div>
-          <div class="stat-box">
-            <strong>Queue Time</strong>
-            <p>4 sec</p>
+          <div class="metric-card">
+            <h3>9.8/10</h3>
+            <p>Community experience</p>
           </div>
         </div>
       </div>
 
-      <div class="card">
-<h3 class="glow-text">Match Lobby</h3>
-        <div class="game-list">
-          <div class="game-card">
-            <strong>Reaction Rush</strong>
-            <p>Tap targets faster than your opponent.</p>
-            <small>30 sec</small>
-            <div class="stake-row">
-              <button onclick="joinMatch('Reaction Rush', 5)">5 KES</button>
-              <button onclick="joinMatch('Reaction Rush', 10)">10 KES</button>
-              <button onclick="joinMatch('Reaction Rush', 20)">20 KES</button>
-              <button onclick="joinMatch('Reaction Rush', 50)">50 KES</button>
+      <div class="hero-right">
+        <div class="showcase-card main-showcase">
+          <div class="card-top">
+            <span class="pill">Live Lounge</span>
+            <span class="status-dot"></span>
+          </div>
+          <h3>Midnight Elite Session</h3>
+          <p>
+            A premium environment with cinematic visuals, quiet confidence,
+            and a polished competitive mood.
+          </p>
+
+          <div class="showcase-grid">
+            <div class="mini-panel">
+              <span>Lighting</span>
+              <strong>Neon Gold</strong>
             </div>
-          </div>
-
-          <div class="game-card">
-            <strong>Aim Burst</strong>
-            <p>Hit moving targets with speed and accuracy.</p>
-            <small>45 sec</small>
-            <div class="stake-row">
-              <button onclick="joinMatch('Aim Burst', 10)">10 KES</button>
-              <button onclick="joinMatch('Aim Burst', 20)">20 KES</button>
-              <button onclick="joinMatch('Aim Burst', 50)">50 KES</button>
+            <div class="mini-panel">
+              <span>Sound</span>
+              <strong>Immersive</strong>
+            </div>
+            <div class="mini-panel">
+              <span>Mode</span>
+              <strong>Ranked Lounge</strong>
+            </div>
+            <div class="mini-panel">
+              <span>Guests</span>
+              <strong>1,284 Online</strong>
             </div>
           </div>
         </div>
 
-        <div id="messageBox" class="message hidden"></div>
+        <div class="floating-card card-a">
+          <span>VIP Tables</span>
+          <strong>Private squad zones</strong>
+        </div>
+
+        <div class="floating-card card-b">
+          <span>Signature Design</span>
+          <strong>Dark chrome + velvet glow</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="features" id="matches">
+      <div class="section-head">
+        <span>WHY IT FEELS PREMIUM</span>
+        <h3>The lounge is designed to feel exclusive, warm, and unforgettable.</h3>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="feature-icon">01</div>
+          <h4>Luxury atmosphere</h4>
+          <p>
+            Deep dark tones, elegant contrast, soft glow, and a carefully balanced
+            layout create a refined gaming mood.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">02</div>
+          <h4>Competitive comfort</h4>
+          <p>
+            The interface supports both social players and serious competitors without
+            making the experience feel cluttered or cheap.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">03</div>
+          <h4>Modern community energy</h4>
+          <p>
+            The lounge feels alive through live sessions, member activity, and smooth
+            transitions that give the platform real presence.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="experience" id="community">
+      <div class="experience-left">
+        <span class="section-tag">LOUNGE EXPERIENCE</span>
+        <h3>More than a gaming page. It should feel like a destination.</h3>
+        <p>
+          The best gaming spaces are not only functional. They feel curated.
+          They make the user slow down, stay longer, and enjoy the brand.
+          That is the direction this Gamers Lounge takes.
+        </p>
+      </div>
+
+      <div class="experience-right">
+        <div class="experience-box">
+          <span>Curated playlists</span>
+          <strong>Lo-fi, synthwave, ambient energy</strong>
+        </div>
+        <div class="experience-box">
+          <span>Social prestige</span>
+          <strong>Exclusive identity for top players</strong>
+        </div>
+        <div class="experience-box">
+          <span>Event mood</span>
+          <strong>Late-night tournaments and lounge sessions</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="membership">
+      <div class="cta-card">
+        <span class="section-tag">JOIN THE SPACE</span>
+        <h3>Step into a gamers lounge that looks and feels premium.</h3>
+        <p>
+          Bring players into a beautiful space where competition meets comfort,
+          community, and visual excellence.
+        </p>
+        <div class="cta-actions">
+          <a href="wallet.html" class="btn btn-solid">Get Membership</a>
+          <a href="play.html" class="btn btn-ghost">Explore Lounge</a>
+        </div>
       </div>
     </section>
   </main>
