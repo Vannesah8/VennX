@@ -3,241 +3,249 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VennX | Competitive Gaming Platform</title>
+  <title>VennX | Competitive Gaming</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-grid"></div>
+
   <div class="page-shell">
     <header class="site-header">
       <div class="brand">
         <div class="brand-mark">VX</div>
         <div class="brand-copy">
           <h1>VennX</h1>
-          <p>Competitive gaming, redefined</p>
+          <p>Skill-based competitive gaming</p>
         </div>
       </div>
 
       <nav class="site-nav">
-        <a href="#platform">Platform</a>
-        <a href="#games">Games</a>
-        <a href="#how-it-works">How it works</a>
+        <a href="#home">Home</a>
+        <a href="#arena">Arena</a>
+        <a href="#players">Players</a>
         <a href="leaderboard.html">Leaderboard</a>
       </nav>
 
       <div class="header-actions">
-        <a href="wallet.html" class="btn btn-secondary">Wallet</a>
+        <a href="wallet.html" class="btn btn-ghost">Wallet</a>
         <a href="play.html" class="btn btn-primary">Play now</a>
       </div>
     </header>
 
     <main>
-      <section class="hero" id="platform">
-        <div class="hero-copy">
-          <span class="eyebrow">FUTURISTIC EXECUTIVE GAMING PLATFORM</span>
+      <section class="hero" id="home">
+        <div class="hero-copy reveal-up">
+          <span class="eyebrow">FUTURISTIC • EXECUTIVE • COMPETITIVE</span>
           <h2>
-            Win with skill in a platform built for
-            <span>clarity, trust, and performance.</span>
+            Built for players who want
+            <span>skill, speed, and status.</span>
           </h2>
           <p>
-            VennX brings competitive gaming, wallet flow, and real-time matchmaking
-            into one organized experience. The design is sharp, modern, and made to
-            feel like a serious product, not a noisy concept.
+            VennX brings competitive play, clean matchmaking, wallet access, and
+            leaderboard credibility into one elegant system. The interface is bold,
+            organized, and designed to feel like a real platform.
           </p>
 
           <div class="hero-actions">
-            <a href="play.html" class="btn btn-primary">Start a match</a>
-            <a href="leaderboard.html" class="btn btn-secondary">See rankings</a>
+            <a href="play.html" class="btn btn-primary">Enter Arena</a>
+            <a href="leaderboard.html" class="btn btn-ghost">View Rankings</a>
           </div>
 
           <div class="hero-stats">
-            <div class="stat-card">
+            <div class="stat-card reveal-up delay-1">
               <strong>24/7</strong>
-              <span>Match availability</span>
+              <span>Live matchmaking</span>
             </div>
-            <div class="stat-card">
+            <div class="stat-card reveal-up delay-2">
               <strong>Fast</strong>
-              <span>Queue experience</span>
+              <span>Queue response</span>
             </div>
-            <div class="stat-card">
+            <div class="stat-card reveal-up delay-3">
               <strong>Secure</strong>
               <span>Wallet-ready flow</span>
             </div>
           </div>
         </div>
 
-        <div class="hero-panel">
-          <div class="panel-card main-panel">
-            <div class="panel-top">
-              <span class="panel-tag">Live platform view</span>
-              <span class="live-indicator"></span>
+        <div class="hero-visual reveal-up delay-2">
+          <div class="hero-panel">
+            <div class="panel-header">
+              <span class="panel-badge">Live Match Panel</span>
+              <span class="live-dot"></span>
             </div>
 
-            <div class="panel-row">
-              <span>Selected game</span>
-              <strong>eFootball</strong>
+            <div class="match-card">
+              <div class="player-side">
+                <div class="avatar avatar-purple">A</div>
+                <div>
+                  <p class="player-label">Player One</p>
+                  <h3>ApolloX</h3>
+                </div>
+              </div>
+
+              <div class="versus">
+                <span>VS</span>
+              </div>
+
+              <div class="player-side player-right">
+                <div>
+                  <p class="player-label right">Player Two</p>
+                  <h3>NovaK</h3>
+                </div>
+                <div class="avatar avatar-dark">N</div>
+              </div>
             </div>
 
-            <div class="panel-row">
-              <span>Stake level</span>
-              <strong>50 KES</strong>
+            <div class="panel-grid">
+              <div class="info-card">
+                <span>Game</span>
+                <strong>eFootball</strong>
+              </div>
+              <div class="info-card">
+                <span>Stake</span>
+                <strong>50 KES</strong>
+              </div>
+              <div class="info-card">
+                <span>Pool</span>
+                <strong>100 KES</strong>
+              </div>
+              <div class="info-card">
+                <span>Winner Gets</span>
+                <strong>90 KES</strong>
+              </div>
             </div>
 
-            <div class="panel-row">
-              <span>Total pool</span>
-              <strong>100 KES</strong>
+            <div class="queue-bar">
+              <div class="queue-fill"></div>
             </div>
-
-            <div class="panel-row">
-              <span>Winner receives</span>
-              <strong>90 KES</strong>
-            </div>
-
-            <div class="panel-divider"></div>
-
-            <div class="panel-status">
-              <p>Matchmaking status</p>
-              <h3>Opponent found</h3>
-              <span>Verified queue • Fast entry • Real-time flow</span>
-            </div>
+            <p class="queue-text">Matchmaking verified • Opponent found • Ready to enter</p>
           </div>
         </div>
       </section>
 
-      <section class="section" id="games">
-        <div class="section-heading">
-          <span>CORE STRUCTURE</span>
-          <h3>An organized platform that keeps the user focused.</h3>
+      <section class="section arena-section" id="arena">
+        <div class="section-head reveal-up">
+          <span>PLATFORM STRUCTURE</span>
+          <h3>Everything important is visible at the right time.</h3>
           <p>
-            Every area is built to guide the player clearly from selection to match result.
+            The strongest gaming platforms reduce confusion. VennX keeps selection,
+            wallet, stakes, and results organized in one clean flow.
           </p>
         </div>
 
         <div class="feature-grid">
-          <article class="feature-card">
-            <div class="feature-number">01</div>
-            <h4>Game-first design</h4>
+          <article class="feature-card reveal-up delay-1">
+            <div class="feature-top">
+              <span class="feature-no">01</span>
+              <div class="mini-icon"></div>
+            </div>
+            <h4>Game-first flow</h4>
             <p>
-              Users immediately understand where to choose a game, review the stake,
-              and enter competition without distraction.
+              Players choose a title, review the amount at stake, and enter a match
+              without unnecessary clutter.
             </p>
           </article>
 
-          <article class="feature-card">
-            <div class="feature-number">02</div>
-            <h4>Executive visual system</h4>
+          <article class="feature-card reveal-up delay-2">
+            <div class="feature-top">
+              <span class="feature-no">02</span>
+              <div class="mini-icon"></div>
+            </div>
+            <h4>Executive interface</h4>
             <p>
-              Dark professional surfaces, strong spacing, and clean typography make
-              the product feel premium and credible.
+              Black surfaces, crisp white text, and purple highlights create a premium
+              product feel without becoming messy.
             </p>
           </article>
 
-          <article class="feature-card">
-            <div class="feature-number">03</div>
-            <h4>Skill-based confidence</h4>
+          <article class="feature-card reveal-up delay-3">
+            <div class="feature-top">
+              <span class="feature-no">03</span>
+              <div class="mini-icon"></div>
+            </div>
+            <h4>Competitive trust</h4>
             <p>
-              Wallet visibility, match flow, and leaderboard logic are presented in a
-              way that feels clear and trustworthy.
+              Wallet visibility, player identity, and result states are shown clearly
+              so the platform feels serious and credible.
             </p>
           </article>
         </div>
       </section>
 
-      <section class="section split-section" id="how-it-works">
-        <div class="split-copy">
-          <span>HOW IT WORKS</span>
-          <h3>Simple flow. Serious product.</h3>
-          <p>
-            The strongest gaming products reduce noise and increase confidence. VennX
-            is designed so players can move quickly from interest to action.
-          </p>
-        </div>
+      <section class="section players-section" id="players">
+        <div class="players-layout">
+          <div class="players-copy reveal-up">
+            <span>TOP PLAYERS</span>
+            <h3>Competition feels stronger when the community looks alive.</h3>
+            <p>
+              Avatars, rankings, and motion add energy to the product. They help the
+              platform feel active while still staying clean and professional.
+            </p>
+            <a href="leaderboard.html" class="btn btn-primary">Explore leaderboard</a>
+          </div>
 
-        <div class="steps-card">
-          <div class="step-item">
-            <span class="step-index">1</span>
-            <div>
-              <h4>Choose a game</h4>
-              <p>Select a supported title and prepare for a skill-based match.</p>
+          <div class="players-stack">
+            <div class="player-card reveal-up delay-1">
+              <div class="player-card-head">
+                <div class="avatar avatar-purple">R</div>
+                <div>
+                  <h4>RiftCore</h4>
+                  <p>Rank #1 • 81% win rate</p>
+                </div>
+              </div>
+              <div class="player-meta">
+                <span>128 wins</span>
+                <span>Elite tier</span>
+              </div>
             </div>
-          </div>
 
-          <div class="step-item">
-            <span class="step-index">2</span>
-            <div>
-              <h4>Set your stake</h4>
-              <p>Pick the amount, view the pool, and understand the payout instantly.</p>
+            <div class="player-card reveal-up delay-2">
+              <div class="player-card-head">
+                <div class="avatar avatar-light">V</div>
+                <div>
+                  <h4>VortexX</h4>
+                  <p>Rank #2 • 78% win rate</p>
+                </div>
+              </div>
+              <div class="player-meta">
+                <span>116 wins</span>
+                <span>Diamond tier</span>
+              </div>
             </div>
-          </div>
 
-          <div class="step-item">
-            <span class="step-index">3</span>
-            <div>
-              <h4>Enter matchmaking</h4>
-              <p>Queue, get matched, and move into a competitive session.</p>
+            <div class="player-card reveal-up delay-3">
+              <div class="player-card-head">
+                <div class="avatar avatar-dark">N</div>
+                <div>
+                  <h4>NightZen</h4>
+                  <p>Rank #3 • 75% win rate</p>
+                </div>
+              </div>
+              <div class="player-meta">
+                <span>102 wins</span>
+                <span>Pro tier</span>
+              </div>
             </div>
-          </div>
-
-          <div class="step-item">
-            <span class="step-index">4</span>
-            <div>
-              <h4>Track results</h4>
-              <p>Review outcomes, update wallet status, and continue competing.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section leaderboard-preview">
-        <div class="section-heading compact">
-          <span>COMPETITIVE SIGNAL</span>
-          <h3>Leaderboard credibility matters.</h3>
-        </div>
-
-        <div class="leaderboard-card">
-          <div class="leaderboard-row leaderboard-head">
-            <span>Rank</span>
-            <span>Player</span>
-            <span>Wins</span>
-            <span>Win Rate</span>
-          </div>
-
-          <div class="leaderboard-row">
-            <span>#1</span>
-            <span>NovaEdge</span>
-            <span>128</span>
-            <span>81%</span>
-          </div>
-
-          <div class="leaderboard-row">
-            <span>#2</span>
-            <span>VortexK</span>
-            <span>116</span>
-            <span>78%</span>
-          </div>
-
-          <div class="leaderboard-row">
-            <span>#3</span>
-            <span>PrimeAxis</span>
-            <span>102</span>
-            <span>75%</span>
           </div>
         </div>
       </section>
 
       <section class="section cta-section">
-        <div class="cta-card">
+        <div class="cta-card reveal-up">
           <span>READY TO COMPETE?</span>
-          <h3>Step into a cleaner, sharper gaming experience.</h3>
+          <h3>Enter a platform that feels modern, sharp, and built to win trust.</h3>
           <p>
-            Explore the play flow, wallet system, and leaderboard structure in a
-            platform designed to feel futuristic and executive.
+            Start with the arena, review your wallet, and move into a cleaner
+            competitive gaming experience.
           </p>
           <div class="cta-actions">
             <a href="play.html" class="btn btn-primary">Go to Play</a>
-            <a href="wallet.html" class="btn btn-secondary">Open Wallet</a>
+            <a href="wallet.html" class="btn btn-ghost">Open Wallet</a>
           </div>
         </div>
       </section>
