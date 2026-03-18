@@ -3,89 +3,133 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VennX Wallet</title>
+  <title>VennX | Wallet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
-  <script src="script.js"></script>
 <body>
-  <header class="navbar">
-    <div class="brand">
-      <h1>VennX</h1>
-      <p>Wallet</p>
-    </div>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-grid"></div>
 
-    <nav class="nav-buttons">
-  <a href="index.html"><button>Home</button></a>
-  <a href="play.html"><button>Play</button></a>
-  <a href="wallet.html"><button>Wallet</button></a>
-  <a href="leaderboard.html"><button>Leaderboard</button></a>
-</nav>
-  </header>
-
-  <main class="container">
-    <section class="card">
-      <h2 class="glow-text">Wallet Overview</h2>
-      <p class="muted">
-        This is the wallet interface prototype. Real balances, deposits, and withdrawals must be handled securely on the backend.
-      </p>
-
-      <div class="stats">
-        <div class="stat-box">
-          <strong>Available Balance</strong>
-          <p>124 KES</p>
-        </div>
-        <div class="stat-box">
-          <strong>Total Won</strong>
-          <p>640 KES</p>
-        </div>
-        <div class="stat-box">
-          <strong>Total Played</strong>
-          <p>57 Matches</p>
+  <div class="page-shell">
+    <header class="site-header">
+      <div class="brand">
+        <div class="brand-mark">VX</div>
+        <div class="brand-copy">
+          <h1>VennX</h1>
+          <p>Skill-based competitive gaming</p>
         </div>
       </div>
-    </section>
 
-    <section class="card">
-      <h3 class="glow-text">Deposit Funds</h3>
-      <p class="muted">Prototype only. Later this will connect to M-Pesa and other payment methods.</p>
-      <div class="stake-row">
-        <button>Deposit 50 KES</button>
-        <button>Deposit 100 KES</button>
-        <button>Deposit 200 KES</button>
-      </div>
-    </section>
+      <nav class="site-nav">
+        <a href="index.html">Home</a>
+        <a href="play.html">Play</a>
+        <a href="leaderboard.html">Leaderboard</a>
+        <a href="wallet.html">Wallet</a>
+      </nav>
 
-    <section class="card">
-      <h3 class="glow-text">Withdraw Funds</h3>
-      <p class="muted">
-        In production, withdrawals should require backend verification, OTP, and risk checks.
-      </p>
-      <div class="stake-row">
-        <button>Withdraw 50 KES</button>
-        <button>Withdraw 100 KES</button>
+      <div class="header-actions">
+        <a href="wallet.html" class="btn btn-ghost">Wallet</a>
+        <a href="play.html" class="btn btn-primary">Play now</a>
       </div>
-    </section>
+    </header>
 
-    <section class="card">
-      <h3 class="glow-text">Recent Transactions</h3>
-      <div class="game-list">
-        <div class="game-card">
-          <strong>Match Win</strong>
-          <p>+18 KES</p>
-          <small>Reaction Rush • Server verified</small>
+    <main>
+      <section class="section">
+        <div class="section-head reveal-up">
+          <span>WALLET CENTER</span>
+          <h3>Clear balance visibility with a professional payment feel.</h3>
+          <p>
+            The wallet should feel simple, trustworthy, and organized. This page gives
+            users quick visibility into balance, actions, and recent activity.
+          </p>
         </div>
-        <div class="game-card">
-          <strong>Match Entry</strong>
-          <p>-10 KES</p>
-          <small>Aim Burst • Queue entry</small>
+
+        <div class="wallet-layout">
+          <div class="hero-panel reveal-up delay-1">
+            <div class="panel-header">
+              <span class="panel-badge">Current Wallet</span>
+              <span class="live-dot"></span>
+            </div>
+
+            <div class="wallet-balance-card">
+              <p>Available balance</p>
+              <h2>124 KES</h2>
+              <span>Ready for competitive entry</span>
+            </div>
+
+            <div class="hero-actions">
+              <button class="btn btn-primary btn-reset">Deposit funds</button>
+              <button class="btn btn-ghost btn-reset">Withdraw</button>
+            </div>
+          </div>
+
+          <div class="feature-card reveal-up delay-2">
+            <div class="play-card-head">
+              <h4>Quick actions</h4>
+              <span class="play-chip">Secure</span>
+            </div>
+
+            <div class="wallet-action-grid">
+              <div class="info-card">
+                <span>Deposit method</span>
+                <strong>M-Pesa / Card</strong>
+              </div>
+              <div class="info-card">
+                <span>Last deposit</span>
+                <strong>250 KES</strong>
+              </div>
+              <div class="info-card">
+                <span>Pending withdrawals</span>
+                <strong>0</strong>
+              </div>
+              <div class="info-card">
+                <span>Verification</span>
+                <strong>Complete</strong>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="game-card">
-          <strong>Deposit</strong>
-          <p>+100 KES</p>
-          <small>M-Pesa placeholder</small>
+
+        <div class="leaderboard-card section reveal-up delay-3">
+          <div class="leaderboard-row leaderboard-head">
+            <span>Date</span>
+            <span>Activity</span>
+            <span>Amount</span>
+            <span>Status</span>
+          </div>
+          <div class="leaderboard-row">
+            <span>Today</span>
+            <span>Match win payout</span>
+            <span>+90 KES</span>
+            <span>Completed</span>
+          </div>
+          <div class="leaderboard-row">
+            <span>Today</span>
+            <span>Match stake</span>
+            <span>-50 KES</span>
+            <span>Completed</span>
+          </div>
+          <div class="leaderboard-row">
+            <span>Yesterday</span>
+            <span>Wallet deposit</span>
+            <span>+250 KES</span>
+            <span>Completed</span>
+          </div>
+          <div class="leaderboard-row">
+            <span>Yesterday</span>
+            <span>Match loss</span>
+            <span>-25 KES</span>
+            <span>Completed</span>
+          </div>
         </div>
-      </div>
-    </section>
-  </main>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
