@@ -3,48 +3,151 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VennX Leaderboard</title>
+  <title>VennX | Leaderboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
-  <script src="script.js"></script>
 <body>
-  <header class="navbar">
-    <div class="brand">
-      <h1>VennX</h1>
-      <p>Leaderboard</p>
-    </div>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-grid"></div>
 
-    <nav class="nav-buttons">
-  <a href="index.html"><button>Home</button></a>
-  <a href="play.html"><button>Play</button></a>
-  <a href="wallet.html"><button>Wallet</button></a>
-  <a href="leaderboard.html"><button>Leaderboard</button></a>
-</nav>
-  </header>
-
-  <main class="container">
-    <section class="card">
-      <h2 class="glow-text">Top Players</h2>
-      <p class="muted">Prototype leaderboard for VennX competitive rankings.</p>
-
-      <div class="game-list">
-        <div class="game-card">
-          <strong>1. ApolloX</strong>
-          <p>Wins: 120</p>
-          <small>Earnings: 4,250 KES</small>
-        </div>
-        <div class="game-card">
-          <strong>2. ReflexKing</strong>
-          <p>Wins: 112</p>
-          <small>Earnings: 3,980 KES</small>
-        </div>
-        <div class="game-card">
-          <strong>3. AimQueen</strong>
-          <p>Wins: 103</p>
-          <small>Earnings: 3,540 KES</small>
+  <div class="page-shell">
+    <header class="site-header">
+      <div class="brand">
+        <div class="brand-mark">VX</div>
+        <div class="brand-copy">
+          <h1>VennX</h1>
+          <p>Skill-based competitive gaming</p>
         </div>
       </div>
-    </section>
-  </main>
+
+      <nav class="site-nav">
+        <a href="index.html">Home</a>
+        <a href="play.html">Play</a>
+        <a href="leaderboard.html">Leaderboard</a>
+        <a href="wallet.html">Wallet</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="wallet.html" class="btn btn-ghost">Wallet</a>
+        <a href="play.html" class="btn btn-primary">Play now</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="section">
+        <div class="section-head reveal-up">
+          <span>TOP COMPETITORS</span>
+          <h3>Rankings, avatars, win rates, and competitive credibility.</h3>
+          <p>
+            A strong leaderboard gives the platform energy and social proof. It helps
+            users trust the competition and stay engaged.
+          </p>
+        </div>
+
+        <div class="leaderboard-layout">
+          <div class="hero-panel reveal-up delay-1">
+            <div class="panel-header">
+              <span class="panel-badge">Top 3 Players</span>
+              <span class="live-dot"></span>
+            </div>
+
+            <div class="podium-grid">
+              <div class="podium-card podium-card-2">
+                <div class="avatar avatar-light">V</div>
+                <h4>VortexX</h4>
+                <p>#2 • 116 wins</p>
+              </div>
+
+              <div class="podium-card podium-card-1">
+                <div class="avatar avatar-purple">R</div>
+                <h4>RiftCore</h4>
+                <p>#1 • 128 wins</p>
+              </div>
+
+              <div class="podium-card podium-card-3">
+                <div class="avatar avatar-dark">N</div>
+                <h4>NightZen</h4>
+                <p>#3 • 102 wins</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="leaderboard-card reveal-up delay-2">
+            <div class="leaderboard-row leaderboard-head">
+              <span>Rank</span>
+              <span>Player</span>
+              <span>Wins</span>
+              <span>Win Rate</span>
+            </div>
+            <div class="leaderboard-row">
+              <span>#1</span>
+              <span>RiftCore</span>
+              <span>128</span>
+              <span>81%</span>
+            </div>
+            <div class="leaderboard-row">
+              <span>#2</span>
+              <span>VortexX</span>
+              <span>116</span>
+              <span>78%</span>
+            </div>
+            <div class="leaderboard-row">
+              <span>#3</span>
+              <span>NightZen</span>
+              <span>102</span>
+              <span>75%</span>
+            </div>
+            <div class="leaderboard-row">
+              <span>#4</span>
+              <span>PrimeAxis</span>
+              <span>94</span>
+              <span>73%</span>
+            </div>
+            <div class="leaderboard-row">
+              <span>#5</span>
+              <span>NovaEdge</span>
+              <span>87</span>
+              <span>71%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-grid section">
+          <article class="feature-card reveal-up delay-1">
+            <div class="feature-top">
+              <span class="feature-no">01</span>
+              <div class="mini-icon"></div>
+            </div>
+            <h4>Visible competition</h4>
+            <p>Rankings make progress public and motivate repeat sessions.</p>
+          </article>
+
+          <article class="feature-card reveal-up delay-2">
+            <div class="feature-top">
+              <span class="feature-no">02</span>
+              <div class="mini-icon"></div>
+            </div>
+            <h4>Player identity</h4>
+            <p>Avatars and names make the platform feel active and social.</p>
+          </article>
+
+          <article class="feature-card reveal-up delay-3">
+            <div class="feature-top">
+              <span class="feature-no">03</span>
+              <div class="mini-icon"></div>
+            </div>
+            <h4>Retention driver</h4>
+            <p>Competitive visibility helps users stay longer and return often.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
