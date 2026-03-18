@@ -198,6 +198,31 @@ function resetPlayFlow() {
   }
 }
 
+function initRevealAnimations() {
+  const revealItems = document.querySelectorAll(
+    ".metric-card, .feature-card, .experience-box, .cta-card, .main-showcase, .floating-card"
+  );
+
+  if (!revealItems.length) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
+
+  revealItems.forEach((item) => {
+    item.classList.add("reveal");
+    observer.observe(item);
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   attachButtonSounds();
+  initRevealAnimations();
 });
