@@ -485,3 +485,126 @@ window.finishMatch = finishMatch;
 window.resetPlayFlow = resetPlayFlow;
 
 document.addEventListener("DOMContentLoaded", initApp);
+
+// ===== REACTION RUSH GAME =====
+
+const RR = {
+  score: 0,
+  time: 20,
+  playing: false,
+  timer: null,
+};
+
+function startReactionGame() {
+  showElement("reactionGame");
+  hideElement("resultCard");
+
+  RR.score = 0;
+  RR.time = 20;
+  RR.playing = false;
+
+  setText("rrScore", 0);
+  setText("rrTime", 20);
+
+  const countdownEl = getElement("rrCountdown");
+  const target = getElement("rrTarget");
+
+  target.classList.add("hidden");
+  countdownEl.classList.remove("hidden");
+
+  let count = 3;
+  countdownEl.textContent = count;
+
+  const countdownInterval = setInterval(() => {
+    count--;
+
+    if (count === 0) {
+      clearInterval(countdownInterval);
+      countdownEl.classList.add("hidden");
+      startRRGameplay();
+      return;
+    }
+
+    countdownEl.textContent = count;
+  }, 1000);
+}
+
+function startRRGameplay() {
+  RR.playing = true;
+
+  const target = getElement("rrTarget");
+  target.classList.remove("hidden");
+
+  moveTarget();
+
+  RR.timer = setInterval(() => {
+    RR.time--;
+    setText("rrTime", RR.time);
+
+    if (RR.time <= 0) {
+      endReactionGame();
+    }
+  }, 1000);
+}
+
+function moveTarget() {
+  const arena = getElement("rrArena");
+  const target = getElement("rrTarget");
+
+  const x = Math.random() * (arena.clientWidth - 70);
+  const y = Math.random() * (arena.clientHeight - 70);
+
+  target.style.left = `${x}px`;
+  target.style.top = `${y}px`;
+}
+
+getElement("rrTarget")?.addEventListener("click", () => {
+  if (!RR.playing) return;
+
+  RR.score++;
+  setText("rrScore", RR.score);
+  moveTarget();
+});
+
+function endReactionGame() {
+  clearInterval(RR.timer);
+  RR.playing = false;
+
+  showQueueMessage("Submitting your score...");
+
+  submitScoreToBackend(RR.score);
+}
+
+async function submitScoreToBackend(score) {
+  try {
+    const data = await apiFetch("/api/matches/submit-score", {
+      method: "POST",
+      body: JSON.stringify({
+        matchId: AppState.activeMatchId,
+        score,
+      }),
+    });
+
+    showQueueMessage("Match completed. Result verified.");
+
+    showResultMessage(
+      data.didWin
+        ? `Victory! You scored ${score}.`
+        : `Defeat. You scored ${score}.`
+    );
+
+    showResultCard({
+      didWin: data.didWin,
+      game: "Reaction Rush",
+      stake: AppState.selectedStake,
+      totalPool: AppState.selectedStake * 2,
+      fee: Math.round(AppState.selectedStake * 2 * 0.1),
+      winnerGets: data.payout,
+    });
+
+    hideElement("reactionGame");
+
+  } catch (error) {
+    showQueueMessage("Score submission failed.");
+  }
+}
