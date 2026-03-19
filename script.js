@@ -313,9 +313,9 @@ async function startMatchmaking() {
       AppState.activeMatchId = data.match.id;
       showQueueMessage("Opponent found. Match starting now...");
 
-      setTimeout(async () => {
-        await finishMatch();
-      }, 1200);
+      setTimeout(() => {
+  startReactionGame();
+}, 1200);
 
       return;
     }
