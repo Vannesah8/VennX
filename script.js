@@ -1,8 +1,11 @@
+const API_URL = "https://vennx-backend.onrender.com";
+
 const AppState = {
   selectedGame: "",
   selectedStake: 0,
-  walletBalance: 124,
-  queueInterval: null,
+  walletBalance: 0,
+  token: "",
+  activeMatchId: null,
   isMatchmaking: false,
 };
 
@@ -35,6 +38,55 @@ function hideElement(id) {
   }
 }
 
+function showQueueMessage(message) {
+  const queueBox = getElement("queueBox");
+  if (!queueBox) return;
+  queueBox.textContent = message;
+  queueBox.classList.remove("hidden");
+}
+
+function clearQueueMessage() {
+  const queueBox = getElement("queueBox");
+  if (!queueBox) return;
+  queueBox.textContent = "";
+  queueBox.classList.add("hidden");
+}
+
+function showResultMessage(message) {
+  const resultBox = getElement("resultBox");
+  if (!resultBox) return;
+  resultBox.textContent = message;
+  resultBox.classList.remove("hidden");
+}
+
+function clearResultMessage() {
+  const resultBox = getElement("resultBox");
+  if (!resultBox) return;
+  resultBox.textContent = "";
+  resultBox.classList.add("hidden");
+}
+
+function hideResultCard() {
+  hideElement("resultCard");
+}
+
+function showResultCard({ didWin, game, stake, totalPool, fee, winnerGets }) {
+  const resultCard = getElement("resultCard");
+  const resultTitle = getElement("resultTitle");
+  const resultDescription = getElement("resultDescription");
+  const resultMeta = getElement("resultMeta");
+
+  if (!resultCard || !resultTitle || !resultDescription || !resultMeta) return;
+
+  resultTitle.textContent = didWin ? "Victory" : "Defeat";
+  resultDescription.textContent = didWin
+    ? `You outperformed your opponent in ${game}. Your prize after platform fee is ${winnerGets} KES.`
+    : `Your opponent won this ${game} match. Better luck next round.`;
+
+  resultMeta.textContent = `Stake ${stake} KES • Pool ${totalPool} KES • Fee ${fee} KES • Server verified`;
+  resultCard.classList.remove("hidden");
+}
+
 function playClickSound(frequency = 700, duration = 0.04) {
   const AudioContextClass = window.AudioContext || window.webkitAudioContext;
   if (!AudioContextClass) return;
@@ -63,7 +115,7 @@ function playClickSound(frequency = 700, duration = 0.04) {
       }
     };
   } catch (error) {
-    console.warn("Audio playback was blocked or failed.", error);
+    console.warn("Audio playback failed.", error);
   }
 }
 
@@ -134,69 +186,95 @@ function selectStake(stake) {
   });
 }
 
-function showQueueMessage(message) {
-  const queueBox = getElement("queueBox");
-  if (!queueBox) return;
+async function apiFetch(path, options = {}) {
+  const headers = {
+    "Content-Type": "application/json",
+    ...(options.headers || {}),
+  };
 
-  queueBox.textContent = message;
-  queueBox.classList.remove("hidden");
-}
-
-function clearQueueMessage() {
-  const queueBox = getElement("queueBox");
-  if (!queueBox) return;
-
-  queueBox.textContent = "";
-  queueBox.classList.add("hidden");
-}
-
-function showResultMessage(message) {
-  const resultBox = getElement("resultBox");
-  if (!resultBox) return;
-
-  resultBox.textContent = message;
-  resultBox.classList.remove("hidden");
-}
-
-function clearResultMessage() {
-  const resultBox = getElement("resultBox");
-  if (!resultBox) return;
-
-  resultBox.textContent = "";
-  resultBox.classList.add("hidden");
-}
-
-function hideResultCard() {
-  hideElement("resultCard");
-}
-
-function showResultCard({ didWin, game, stake, totalPool, fee, winnerGets }) {
-  const resultCard = getElement("resultCard");
-  const resultTitle = getElement("resultTitle");
-  const resultDescription = getElement("resultDescription");
-  const resultMeta = getElement("resultMeta");
-
-  if (!resultCard || !resultTitle || !resultDescription || !resultMeta) return;
-
-  resultTitle.textContent = didWin ? "Victory" : "Defeat";
-  resultDescription.textContent = didWin
-    ? `You outperformed your opponent in ${game}. Your prize after platform fee is ${winnerGets} KES.`
-    : `Your opponent won this ${game} match. Better luck next round.`;
-
-  resultMeta.textContent = `Stake ${stake} KES • Pool ${totalPool} KES • Fee ${fee} KES • Server validation placeholder`;
-
-  resultCard.classList.remove("hidden");
-}
-
-function stopMatchmakingInterval() {
-  if (AppState.queueInterval) {
-    clearInterval(AppState.queueInterval);
-    AppState.queueInterval = null;
+  if (AppState.token) {
+    headers.Authorization = `Bearer ${AppState.token}`;
   }
-  AppState.isMatchmaking = false;
+
+  const response = await fetch(`${API_URL}${path}`, {
+    ...options,
+    headers,
+  });
+
+  const data = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    throw new Error(data.error || "Request failed");
+  }
+
+  return data;
 }
 
-function startMatchmaking() {
+async function loginDemoUser() {
+  const savedToken = localStorage.getItem("vennx_token");
+  if (savedToken) {
+    AppState.token = savedToken;
+    return;
+  }
+
+  const data = await apiFetch("/api/auth/login", {
+    method: "POST",
+    headers: {},
+    body: JSON.stringify({
+      username: "apollo",
+      password: "1234",
+    }),
+  });
+
+  if (data.token) {
+    AppState.token = data.token;
+    localStorage.setItem("vennx_token", data.token);
+  }
+}
+
+async function fetchWallet() {
+  const data = await apiFetch("/api/wallet", {
+    method: "GET",
+  });
+
+  if (typeof data.balance === "number") {
+    AppState.walletBalance = data.balance;
+    updateWalletDisplay();
+  }
+}
+
+async function fetchLeaderboard() {
+  const leaderboardBody = getElement("leaderboardBody");
+  if (!leaderboardBody) return;
+
+  try {
+    const data = await apiFetch("/api/leaderboard", {
+      method: "GET",
+      headers: {},
+    });
+
+    leaderboardBody.innerHTML = "";
+
+    data.forEach((player) => {
+      const matchesPlayed = player.wins + player.losses;
+      const winRate = matchesPlayed > 0 ? Math.round((player.wins / matchesPlayed) * 100) : 0;
+
+      const row = document.createElement("div");
+      row.className = "leaderboard-row";
+      row.innerHTML = `
+        <span>#${player.rank}</span>
+        <span>${player.username}</span>
+        <span>${player.wins}</span>
+        <span>${winRate}%</span>
+      `;
+      leaderboardBody.appendChild(row);
+    });
+  } catch (error) {
+    console.error("Leaderboard load failed:", error.message);
+  }
+}
+
+async function startMatchmaking() {
   if (AppState.isMatchmaking) return;
 
   if (!AppState.selectedGame || !AppState.selectedStake) {
@@ -211,82 +289,106 @@ function startMatchmaking() {
 
   clearResultMessage();
   hideResultCard();
-
-  let seconds = 3;
   AppState.isMatchmaking = true;
 
-  showQueueMessage(
-    `Searching for opponent for ${AppState.selectedGame} at ${AppState.selectedStake} KES... ${seconds}`
-  );
+  try {
+    showQueueMessage("Submitting match request...");
+    const data = await apiFetch("/api/matches/queue", {
+      method: "POST",
+      body: JSON.stringify({
+        game: AppState.selectedGame,
+        stake: AppState.selectedStake,
+      }),
+    });
 
-  stopMatchmakingInterval();
+    await fetchWallet();
 
-  AppState.isMatchmaking = true;
-  AppState.queueInterval = setInterval(() => {
-    seconds -= 1;
-
-    if (seconds > 0) {
-      showQueueMessage(
-        `Searching for opponent for ${AppState.selectedGame} at ${AppState.selectedStake} KES... ${seconds}`
-      );
+    if (data.status === "searching") {
+      showQueueMessage("Waiting for opponent...");
+      AppState.isMatchmaking = false;
       return;
     }
 
-    stopMatchmakingInterval();
-    showQueueMessage("Opponent found. Match starting now...");
+    if (data.status === "matched" && data.match?.id) {
+      AppState.activeMatchId = data.match.id;
+      showQueueMessage("Opponent found. Match starting now...");
 
-    setTimeout(() => {
-      finishMatch();
-    }, 1000);
-  }, 1000);
+      setTimeout(async () => {
+        await finishMatch();
+      }, 1200);
+
+      return;
+    }
+
+    showQueueMessage("Unexpected matchmaking response.");
+    AppState.isMatchmaking = false;
+  } catch (error) {
+    showQueueMessage(error.message);
+    AppState.isMatchmaking = false;
+  }
 }
 
-function finishMatch() {
-  const totalPool = AppState.selectedStake * 2;
-  const fee = Math.round(totalPool * 0.1);
-  const winnerGets = totalPool - fee;
-  const didWin = Math.random() > 0.45;
-
-  AppState.walletBalance -= AppState.selectedStake;
-
-  if (didWin) {
-    AppState.walletBalance += winnerGets;
+async function finishMatch() {
+  if (!AppState.activeMatchId) {
+    showQueueMessage("No active match found.");
+    AppState.isMatchmaking = false;
+    return;
   }
 
-  updateWalletDisplay();
-  showQueueMessage("Match completed. Result verified.");
+  try {
+    showQueueMessage("Match in progress...");
+    const data = await apiFetch("/api/matches/result", {
+      method: "POST",
+      body: JSON.stringify({
+        matchId: AppState.activeMatchId,
+      }),
+    });
 
-  if (didWin) {
-    showResultMessage(
-      `Victory! You won ${winnerGets} KES in ${AppState.selectedGame}.`
-    );
-  } else {
-    showResultMessage(
-      `Defeat. You lost ${AppState.selectedStake} KES in ${AppState.selectedGame}.`
-    );
+    const totalPool = AppState.selectedStake * 2;
+    const fee = Math.round(totalPool * 0.1);
+    const winnerGets = totalPool - fee;
+
+    AppState.walletBalance = data.balance;
+    updateWalletDisplay();
+
+    showQueueMessage("Match completed. Result verified.");
+
+    if (data.didWin) {
+      showResultMessage(
+        `Victory! You won ${winnerGets} KES in ${AppState.selectedGame}.`
+      );
+    } else {
+      showResultMessage(
+        `Defeat. You lost ${AppState.selectedStake} KES in ${AppState.selectedGame}.`
+      );
+    }
+
+    showResultCard({
+      didWin: data.didWin,
+      game: AppState.selectedGame,
+      stake: AppState.selectedStake,
+      totalPool,
+      fee,
+      winnerGets,
+    });
+
+    AppState.activeMatchId = null;
+    AppState.isMatchmaking = false;
+
+    playClickSound(data.didWin ? 920 : 300, 0.06);
+  } catch (error) {
+    showQueueMessage(error.message);
+    AppState.isMatchmaking = false;
   }
-
-  showResultCard({
-    didWin,
-    game: AppState.selectedGame,
-    stake: AppState.selectedStake,
-    totalPool,
-    fee,
-    winnerGets,
-  });
-
-  playClickSound(didWin ? 920 : 300, 0.06);
 }
 
-function resetPlayFlow() {
-  stopMatchmakingInterval();
-
+async function resetPlayFlow() {
   AppState.selectedGame = "";
   AppState.selectedStake = 0;
-  AppState.walletBalance = 124;
+  AppState.activeMatchId = null;
+  AppState.isMatchmaking = false;
 
   updateSelectionDisplay();
-  updateWalletDisplay();
   updateStakeDisplays(0, 0, 0);
   clearQueueMessage();
   clearResultMessage();
@@ -294,6 +396,12 @@ function resetPlayFlow() {
 
   const activeButtons = getElements("[data-game].active, [data-stake].active");
   activeButtons.forEach((button) => button.classList.remove("active"));
+
+  try {
+    await fetchWallet();
+  } catch (error) {
+    console.error("Wallet refresh failed:", error.message);
+  }
 }
 
 function initRevealMotion() {
@@ -353,12 +461,21 @@ function initPageDefaults() {
   }
 }
 
-function initApp() {
+async function initApp() {
   attachButtonSounds();
   attachHoverSounds();
   initRevealMotion();
   initAutoBinding();
   initPageDefaults();
+
+  try {
+    await loginDemoUser();
+    await fetchWallet();
+    await fetchLeaderboard();
+  } catch (error) {
+    console.error("App init failed:", error.message);
+    showQueueMessage(`Backend connection failed: ${error.message}`);
+  }
 }
 
 window.selectGame = selectGame;
